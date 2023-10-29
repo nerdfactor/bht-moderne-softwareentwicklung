@@ -1,5 +1,4 @@
-# bht-moderne-softwareentwicklung
-## Task001: UML Modellierung
+# Task001: UML Modellierung
 
 Beschreibung einer Anwendung zum Erfassen und weiteren Auswerten von Spielereignissen.
 
