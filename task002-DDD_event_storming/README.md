@@ -1,6 +1,7 @@
 # Task002: DDD Event Storming
 
 Überarbeitung der vorher beschriebenen Anwendung zum Erfassen und weiteren Auswerten von Spielereignissen nach DDD.
+Die Digaramme können auch im Miro Board eingesehen werden: https://miro.com/app/board/uXjVNXhXADQ=/?share_link_id=941191084771
 
 ### Event Storming
 ![Event Storming](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task002-DDD_event_storming/spielbericht-event_storming.jpg?raw=true)
