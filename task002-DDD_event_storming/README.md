@@ -21,6 +21,6 @@ Die Domains habe ich in weiter gruppiert und die Beziehungen zwischen den Domain
 
 
 ### Core Domain Chart
-![Core Domain Chart](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task002-DDD_event_storming/spielbericht-core_domain_chart?raw=true)
+![Core Domain Chart](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task002-DDD_event_storming/spielbericht-core_domain_chart.jpg?raw=true)
 
 Und schließlich habe ich diese Domains in einem Core Domain Chart angeordnet.
