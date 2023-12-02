@@ -16,7 +16,7 @@ Da ich die Beispielanwendung gleichzeitig für die nächste Aufgabe verwendet ha
 
 Die Beispielanwendung baut ganz grob auf dem [Bowling Game Code Kata](https://codingdojo.org/kata/Bowling/) auf. Allerdings habe ich mich am Ende nicht zu fest an die Beschreibung gehalten. Das Ergebnis ist eine winzig kleine Konsolenanwendung zum Berechnen eines Spielergebnisses.
 
-![bowling_game](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task004-clean_code/bowling_game.png?raw=true)
+![bowling_game](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task004-clean_code/bowling-game.png?raw=true)
 
 ### Understand your Requirements
 Bevor ich angefangen habe, sollte ich die Anforderungen an die Anwendungen richtig verstehen. Die Regeln eines Bowling Spiels schienen mir leider offensichtlich genug, dass ich sie nicht nochmal nachgesehen habe. Also hier schon mal den ersten Fehler gemacht. Die Liste aus der Beschreibung des Katas habe ich nur überflogen:
@@ -37,7 +37,7 @@ Auch wenn es nur eine sehr kleine Anwendung ist, wollte ich zumindest etwas Desi
 Ich bin davon ausgegangen, dass jedes Spiel aus zehn Frames mit jeweils zwei Werten für umgefallene Pins bestehen wird.
 
 ### Write Tests
-Bevor es tatsächlich mit Code los ging, habe ich dem Projekt [zwei erste Unit Tests spendiert](https://github.com/nerdfactor/bht-bowling-game/blob/a73cd228605a8cc35c468608976f0e75623ffa1f/src/test/java/eu/nerdfactor/bowling/BowlingGameTest.java#L16).
+Bevor es tatsächlich mit Code los ging, habe ich dem Projekt zwei erste Unit Tests spendiert.
 
 ```Java
 class BowlingGameTest {
