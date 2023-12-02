@@ -268,7 +268,7 @@ Da mir in der letzten Aufgabe SonarQube besonders gut gefallen habe, hab ich auc
 
 ![sonarqube-1](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task004-clean_code/sonarqube-1.png?raw=true)
 
-![sonarqube-2](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task004-clean_code/sonarqube-1.png?raw=true)
+![sonarqube-2](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task004-clean_code/sonarqube-2.png?raw=true)
 
 Auch wenn bei diesem kleinen Projekt eigentlich nicht mehr viele Probleme hochkommen sollten, kann man immer noch die Vererbung der Exceptions richtig rücken und eine bewusste Entscheidung darüber treffen in der Main Methode der Konsolenanwendung doch eine Ausgabe in die Konsole zu geben.
 
