@@ -316,6 +316,6 @@ jobs:
 
 Das Image gibt es dank dem neuen verbesserten Workflow jetzt auch direkt für adm64 und arm64 und kann auf meinen Testservern genutzt werden.
 
-![docker-portainer](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task006-Build_und_CICD/docker-potainer.png?raw=true)
+![docker-portainer](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task006-Build_und_CICD/docker-portainer.png?raw=true)
 
 Was die Anwendung unter https://bowling.nrdfctr.app genau macht, ist aber Teil der Microservice Aufgabe.
