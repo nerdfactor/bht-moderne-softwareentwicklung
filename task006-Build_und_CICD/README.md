@@ -323,7 +323,7 @@ Was die Anwendung unter https://bowling.nrdfctr.app genau macht, ist aber Teil d
 ## Addon: Mehr Github Actions
 Da ich für diese Aufgabe doch noch etwas mehr Zeit habe, probiere ich direkt die nächste sinnvolle Funktion für Github Actions aus. Zwischen den beiden bereits implementierten Schritte zum Prüfen des Codes mit Sonar Qube und dem Erstellen und Veröffentlichen eines fertigen Docker Containers fehlt mir eigentlich noch ein Schritt zum Veröffentlichen einer Bibliothek als Artefakt.
 
-Dafür eignet sich der Bowling Service aus der Microservice Aufgabe nicht wirklich gut, daher greife ich auf eines meiner Hobby Basteleien zurück ([generted-rest](https://github.com/nerdfactor/generated-rest)), die ich eh schon eine ganze Weile irgendwo veröffentichen wollte.
+Dafür eignet sich der Bowling Service aus der Microservice Aufgabe nicht wirklich gut, daher greife ich auf eines meiner Hobby Basteleien zurück ([generated-rest](https://github.com/nerdfactor/generated-rest)), die ich eh schon eine ganze Weile irgendwo veröffentichen wollte.
 
 Da es sich dabei um ein Maven Projekt handelt, kann ich auch direkt herausfinden, ob die Github Actions großartig anders funktionieren als mit Gradle.
 
