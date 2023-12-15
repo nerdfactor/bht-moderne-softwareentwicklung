@@ -1,6 +1,6 @@
 # Task006: Build und CI/CD
 
-Ich nutze für diese Aufgabe den Code aus der nächsten Aufgabe zu Microservices. Daher wird für dieses gemeinsame Projekt ein neues [Repository auf Github](https://github.com/nerdfactor/bht-bowling-service) erstellt
+Ich nutze für diese Aufgabe den Code aus der nächsten Aufgabe zu Microservices. Daher wird für dieses gemeinsame Projekt ein neues [Repository auf Github](https://github.com/nerdfactor/bht-bowling-service) erstellt.
 
 ## Build Tools
 
@@ -12,7 +12,7 @@ Natürlich wäre es jetzt einfach sich von [spring initialir](https://start.spri
 ![new-gradle-project](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task006-Build_und_CICD/new-gradle-project.png?raw=true)
 
 
-Das so erzeugte Projekt ist mir natürlich komplett unbekannt aber Spring bietet eine [hilfreiche Anleitung](https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/) zum Einrichten von Spring Boot mit Gradle. Daraus ergibt sich erstmal [ein einfaches Build Skript](https://github.com/nerdfactor/bht-bowling-service/commit/bf3a39c7807027db058f73c64d769132d4658a5f), mit dem zumindest ein Server startet.
+
 
 ```gradle
 plugins {
@@ -319,3 +319,61 @@ Das Image gibt es dank dem neuen verbesserten Workflow jetzt auch direkt für ad
 ![docker-portainer](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task006-Build_und_CICD/docker-portainer.png?raw=true)
 
 Was die Anwendung unter https://bowling.nrdfctr.app genau macht, ist aber Teil der Microservice Aufgabe.
+
+## Addon: Mehr Github Actions
+Da ich für diese Aufgabe doch noch etwas mehr Zeit habe, probiere ich direkt die nächste sinnvolle Funktion für Github Actions aus. Zwischen den beiden bereits implementierten Schritte zum Prüfen des Codes mit Sonar Qube und dem Erstellen und Veröffentlichen eines fertigen Docker Containers fehlt mir eigentlich noch ein Schritt zum Veröffentlichen einer Bibliothek als Artefakt.
+
+Dafür eignet sich der Bowling Service aus der Microservice Aufgabe nicht wirklich gut, daher greife ich auf eines meiner Hobby Basteleien zurück ([generted-rest](https://github.com/nerdfactor/generated-rest)), die ich eh schon eine ganze Weile irgendwo veröffentichen wollte.
+
+Da es sich dabei um ein Maven Projekt handelt, kann ich auch direkt herausfinden, ob die Github Actions großartig anders funktionieren als mit Gradle.
+
+Die neue Action ist dank Githubs Unterstützung sogar besonders leicht anzulegen. Das Erstellen einer Bibliothek und Einchecken in der Github eigenen Registry ist natürlich eine viel gefragte Funktion und Github bietet einen vorgefertigten Workflow.
+
+![addon-workflow](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task006-Build_und_CICD/addon-workflow.png?raw=true)
+
+Den daraus erzeugte Workflow hätte ich aber ohne die bisher schon geleistete Vorarbeit sicher nicht verstanden. So ist für mich relativ klar, wass gemacht wird und ich kann nach meinen Wünschen anpassen.
+
+```yaml
+name: Maven Package
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+        server-id: github
+        settings-path: ${{ github.workspace }}
+
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+
+    - name: Publish to GitHub Packages Apache Maven
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+```
+
+Da die Projekte jeweils einen Maven bzw. Gradle Wrapper mitbringen, ist der Unterschied zwischen den beiden Build Tools innerhalb des Workflows zu vernachlässigen. Beide Tools können einfach direkt aufgerufen werden, ohne Vorbereitungen zu treffen (wie z.B. bei Docker Buildx notwendig).
+
+Und mit Hilfe der Tags und dem einfachen Release System von Github habe ich durch den Workflow im Handumdrehen die Bibliothek als Artefakt auf Github veröffentlicht.
+
+![addon-package](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task006-Build_und_CICD/addon-package.png?raw=true)
+
+Leider musste ich mit Erschrecken feststellen, dass Github die so erstellen Artefakte nicht öffentlich zur Verfügung stellt. Da aber sowohl der zu Grunde liegende Quellcode öffentlich ausgecheckt werden kann, als auch ein auf dem Artefakt aufbauendes Docker Image aus der Registry bezogen werden kann, wundert mich die Zurückhaltung an dieser Stelle.
+
+Damit ich doch noch eine wirklich öffentliche Version der Bibliothek bereitstellen kann, kommt aber zum Glück [jitpack.io](https://jitpack.io) zur Hilfe. Darüber lassen sich Github Projekte direkt [als Artefakt veröffentlichen](https://jitpack.io/#nerdfactor/generated-rest). Die etwas kompliziertere Registrierung auf Maven Central hebe ich mir vielleicht für eine spätere Aufgabe auf.
