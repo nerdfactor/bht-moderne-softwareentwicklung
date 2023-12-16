@@ -39,7 +39,7 @@ tasks.test {
     useJUnitPlatform()
 }
 ```
-Das einzige Problem war dabei nur die Dependencies, die ich aus meinem Maven Projekten ja schon kenne, in der neuen Form noch einmal heraus zu suchen. Als netten Nebeneffekt habe ich dabei auch für alle Artefakte mal die aktuelle Version nehmen können.
+Etwas umständlich war es dann die Dependencies, die ich aus meinem Maven Projekten ja schon kenne, in der neuen Form noch einmal heraus zu suchen. Als netten Nebeneffekt habe ich dabei auch für alle Artefakte mal die aktuelle Version nehmen können.
 
 ```gradle
 plugins {
@@ -166,11 +166,11 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_URL }}
 ```
-Damit hangele ich mich Schritt für Schritt von einer Fehlermeldung zur nächsten und komme so einem Verständnis für diese Workflows immer näher. Die Erkentnis, dass es sich bei den Workflows im Grund um einen Container handelt, in dem nacheinander Schritte abgearbeitet werden, hat etwas gedauert. Danach war aber alles deutlich klarer.
+Damit hangele ich mich Schritt für Schritt von einer Fehlermeldung zur nächsten und komme so einem Verständnis für diese Workflows immer näher. Die Erkenntnis, dass es sich bei den Workflows im Grund um einen Container handelt, in dem nacheinander Schritte abgearbeitet werden, hat etwas gedauert. Danach war aber alles deutlich klarer.
 
 Neu für mich war auch wie ich Secrets in Github einrichten kann, die dann auch in den Workflows verwendet werden. 
 
-Am Ende habe ich einen Workflow, der erst den Code auscheckt, das Projekt baut und dann die Informationen an Sonarqube überträgt. Und alles direkt bei einem Commit, ohne das ich noch mehr machen muss.
+Am Ende habe ich einen Workflow, der erst den Code auscheckt, das Projekt baut und dann die Informationen an Sonarqube überträgt. Und alles direkt bei einem Commit, ohne dass ich noch mehr machen muss.
 
 ```yaml
 on:
@@ -254,7 +254,7 @@ jobs:
 
 ![docker-boot-workflow](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task006-Build_und_CICD/docker-boot-workflow.png?raw=true)
 
-### Docker Workflow für mehreren Architekturen
+### Docker Workflow für mehrere Architekturen
 Mit dem so erstellen Docker Image aus dem Workflow wollte ich es eigentlich belassen. Für die Microservice Aufgabe wollte ich das Image allerdings auf einem meiner Server laufen lassen, damit ich da auch ein schönes greifbares Ergebnis habe. Leider habe ich nicht damit gerechnet, dass mir hier die Server auf ARM Basis einen Strich durch die Rechnung machen.
 
 Das vom Gradle Plugin erstelle Docker Image ist nur für amd64 gebaut und nach der Beschreibung des Plugins gibt es wohl auch keinen Support für ARM. Das liegt wohl irgendwie an dem genutzten Builder Image, aber genau verstehe ich den Grund auch nicht. Anstatt daran weiter herum zu probieren, wollte ich es dann doch einfach direkt selber bauen. Kann ja auch nicht so schwer sein.
@@ -321,9 +321,9 @@ Das Image gibt es dank dem neuen verbesserten Workflow jetzt auch direkt für ad
 Was die Anwendung unter https://bowling.nrdfctr.app genau macht, ist aber Teil der Microservice Aufgabe.
 
 ## Addon: Mehr Github Actions
-Da ich für diese Aufgabe doch noch etwas mehr Zeit habe, probiere ich direkt die nächste sinnvolle Funktion für Github Actions aus. Zwischen den beiden bereits implementierten Schritte zum Prüfen des Codes mit Sonar Qube und dem Erstellen und Veröffentlichen eines fertigen Docker Containers fehlt mir eigentlich noch ein Schritt zum Veröffentlichen einer Bibliothek als Artefakt.
+Da ich für diese Aufgabe doch noch etwas mehr Zeit habe, probiere ich direkt die nächste sinnvolle Funktion für Github Actions aus. Zwischen den beiden bereits implementierten Schritten zum Prüfen des Codes mit Sonarqube und dem Erstellen und Veröffentlichen eines fertigen Docker Containers fehlt mir eigentlich noch ein Schritt zum Veröffentlichen einer Bibliothek als Artefakt.
 
-Dafür eignet sich der Bowling Service aus der Microservice Aufgabe nicht wirklich gut, daher greife ich auf eines meiner Hobby Basteleien zurück ([generated-rest](https://github.com/nerdfactor/generated-rest)), die ich eh schon eine ganze Weile irgendwo veröffentichen wollte.
+Dafür eignet sich der Bowling Service aus der Microservice Aufgabe nicht wirklich gut, daher greife ich auf eines meiner Hobby Basteleien zurück ([generated-rest](https://github.com/nerdfactor/generated-rest)), die ich eh schon eine ganze Weile irgendwo veröffentlichen wollte.
 
 Da es sich dabei um ein Maven Projekt handelt, kann ich auch direkt herausfinden, ob die Github Actions großartig anders funktionieren als mit Gradle.
 
@@ -331,7 +331,7 @@ Die neue Action ist dank Githubs Unterstützung sogar besonders leicht anzulegen
 
 ![addon-workflow](https://github.com/nerdfactor/bht-moderne-softwareentwicklung/blob/main/task006-Build_und_CICD/addon-workflow.png?raw=true)
 
-Den daraus erzeugte Workflow hätte ich aber ohne die bisher schon geleistete Vorarbeit sicher nicht verstanden. So ist für mich relativ klar, wass gemacht wird und ich kann nach meinen Wünschen anpassen.
+Den daraus erzeugte Workflow hätte ich aber ohne die bisher schon geleistete Vorarbeit sicher nicht verstanden. So ist für mich relativ klar, was gemacht wird und ich kann nach meinen Wünschen anpassen.
 
 ```yaml
 name: Maven Package
