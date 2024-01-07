@@ -1,0 +1,93 @@
+options {
+  STATIC = false;
+}
+
+PARSER_BEGIN(GeneratedParser)
+import java.io.*;
+
+public class GeneratedParser {
+  private static GeneratedConfig config = new GeneratedConfig();
+
+  public static void main(String[] args) throws ParseException {
+    String input = "new GeneratedRestCustomerController for Customer and String " +
+		    "at /api/customers " +
+		    "with CustomerDto " +
+		    "with Security";
+
+    GeneratedConfig config = parseFromString(input);
+    System.out.println("Parsed Configuration:");
+    System.out.println("Controller Name: " + config.controllerName);
+    System.out.println("Entity Name: " + config.entityName);
+    System.out.println("ID Name: " + config.idName);
+    System.out.println("Path: " + config.path);
+    System.out.println("DTO Name: " + config.dtoName);
+    System.out.println("Security: " + config.security);
+  }
+
+  public static GeneratedConfig parseFromString(String input) {
+          GeneratedConfig config = new GeneratedConfig();
+          StringReader reader = new StringReader(input);
+          GeneratedParser parser = new GeneratedParser(reader);
+          parser.config = config; // Set the config for parsing
+          try {
+              parser.parse();
+          } catch (ParseException e) {
+              e.printStackTrace();
+          }
+          return config;
+      }
+
+  public static GeneratedConfig getConfig() {
+    return config;
+  }
+}
+PARSER_END(GeneratedParser)
+
+SKIP : {
+" "
+| "\t"
+| "\n"
+| "\r"
+| "\f"
+}
+
+TOKEN : {
+  <WITH_SECURITY: "with Security">
+  | <NEW: "new">
+  | <FOR: "for">
+  | <AND: "and">
+  | <AT: "at">
+  | <WITH: "with">
+  | <IDENTIFIER: (["a"-"z", "A"-"Z", "0"-"9", "_", "-", "/"])+ >
+}
+
+void parse() :
+{}
+{
+  controllerDeclaration()
+}
+
+void controllerDeclaration() :
+{
+  config.controllerName = "";
+  config.entityName = "";
+  config.idName = "";
+  config.dtoName = "";
+  config.path = "";
+  config.security = false;
+}
+{
+  <NEW> config.controllerName = Identifier() <FOR> config.entityName = Identifier() <AND> config.idName = Identifier()
+  <AT> config.path = Identifier() 
+  <WITH> config.dtoName = Identifier()
+  (<WITH_SECURITY> { config.security = true; })?
+}
+
+String Identifier() :
+{
+  Token t;
+}
+{
+  t = <IDENTIFIER>
+  { return t.image; }
+}
